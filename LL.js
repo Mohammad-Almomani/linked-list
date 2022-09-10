@@ -19,24 +19,64 @@ class LinkedList {
   appendAtEnd(item) {
 
     const newNode = new Node(item);
-    if(!this.head) {
-        this.head = newNode;
-      } else {
-      let node = this.head;
-      while(node.next) {
-        node = node.next;
-      }
-      node.next = newNode;
+    if(this.head) {
+        let node = this.head;
+        while(node.next) {
+          node = node.next;
+        }
+        node.next = newNode;
+    } else {
+          this.head = newNode;
     }
     this.linkedListLength +=1;
   }
+
+  deleteMiddle() {
+
+    let middleNode = Math.floor((this.linkedListLength-1)/2);
+     let node = this.head;
+     let prevNode;
+
+     if (middleNode == 0){ // delete the first node
+      this.head = node.next
+     } else {
+      for (let i = 0; i< middleNode; i++) {
+        prevNode = node;
+        node = node.next;
+      }
+       prevNode.next = node.next
+     }
+     this.linkedListLength--;
+  }
+
+  deleteByIndex(idx) {
+    
+    if (idx > this.linkedListLength) return "item dose not exist"
+   
+     let node = this.head;
+     let prevNode;
+
+     if (idx == 0){ // delete the first node
+      this.head = node.next
+     } else {
+      for (let i =0; i< idx; i++) {
+        prevNode = node;
+        node = node.next;
+      }
+       prevNode.next = node.next
+     }
+     this.linkedListLength--;
+  }
+
 };
 
 // const LL = new LinkedList()
-// // LL.insertAtBeginning(1)
+// LL.insertAtBeginning(1)
 // LL.appendAtEnd(2)
-// // LL.insertAtBeginning(11)
+// LL.insertAtBeginning(11)
 // LL.appendAtEnd(22)
+// LL.deleteByIndex(50)
+// // LL.deleteMiddle()
 
 // // LL.insertAtBeginning(3)
 // // LL.insertAtBeginning(4)
@@ -44,7 +84,7 @@ class LinkedList {
 // // LL.insertAtBeginning(6)
 
 
-// console.log(LL.head)
+// console.log(LL)
 
 
 module.exports = LinkedList

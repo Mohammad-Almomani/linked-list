@@ -7,40 +7,82 @@ describe("Verify creating linked list", () => {
     const LL = new LinkedList();
     expect(LL).toBeInstanceOf(LinkedList);
     expect(LL).toBeDefined();
-    expect(LL.head).toBe(null);
-  });
-
-  describe("Verify insert node at the beginning", () => {
-    it("Test inserting node at the beginning", () => {
-      const LL = new LinkedList();
-      LL.insertAtBeginning(1);
-      expect(LL.head.value).toEqual(1);
-      LL.insertAtBeginning(2);
-      expect(LL.head.value).toEqual(2);
-      expect(LL.head.next.value).toEqual(1);
-      expect(LL.head.next.next).toBe(null);
-    });
-  });
-
-  describe("Verify append node at the end", () => {
-    it("Test appending node at the end", () => {
-      const LL = new LinkedList();
-      LL.insertAtBeginning(2);
-      LL.insertAtBeginning(1);
-      LL.appendAtEnd(3);
-      expect(LL.head.value).toEqual(1);
-      expect(LL.head.next.value).toEqual(2);
-      expect(LL.head.next.next.value).toEqual(3);
-      expect(LL.head.next.next.next).toBe(null);
-      expect(LL.linkedListLength).toEqual(3);
-    });
-    it("Test appending node to empty linked list", () => {
-        const LL = new LinkedList();
-       
-        LL.appendAtEnd(3);
-        expect(LL.head.value).toEqual(3);
-        expect(LL.head.next).toBe(null);
-    });
+    expect(LL.head).toBeNull();
   });
 });
 
+describe("Verify insert node at the beginning", () => {
+  it("Test inserting node at the beginning", () => {
+    const LL = new LinkedList();
+    LL.insertAtBeginning(1);
+    expect(LL.head.value).toEqual(1);
+    LL.insertAtBeginning(2);
+    expect(LL.head.value).toEqual(2);
+    expect(LL.head.next.value).toEqual(1);
+    expect(LL.head.next.next).toBeNull();
+  });
+});
+
+describe("Verify append node at the end", () => {
+  it("Test appending node at the end", () => {
+    const LL = new LinkedList();
+    LL.insertAtBeginning(2);
+    LL.insertAtBeginning(1);
+    LL.appendAtEnd(3);
+    expect(LL.head.value).toEqual(1);
+    expect(LL.head.next.value).toEqual(2);
+    expect(LL.head.next.next.value).toEqual(3);
+    expect(LL.head.next.next.next).toBeNull();
+    expect(LL.linkedListLength).toEqual(3);
+  });
+  it("Test appending node to empty linked list", () => {
+    const LL = new LinkedList();
+
+    LL.appendAtEnd(3);
+    expect(LL.head.value).toEqual(3);
+    expect(LL.head.next).toBeNull();
+  });
+});
+
+describe("Verify delete middle node", () => {
+  it("Test deleting middle node", () => {
+    const LL = new LinkedList();
+    LL.insertAtBeginning(1);
+    LL.insertAtBeginning(2);
+    LL.insertAtBeginning(3);
+    LL.deleteMiddle();
+    expect(LL.head.value).toEqual(3);
+    expect(LL.head.next.value).toEqual(1);
+    expect(LL.head.next.next).toBeNull();
+  });
+  it("Test deleting middle node for one element linked list", () => {
+    const LL = new LinkedList();
+    LL.insertAtBeginning(1);
+    LL.deleteMiddle();
+    expect(LL.head).toBeNull();
+  });
+});
+
+
+describe("Verify delete node by index", () => {
+  it("Test deleting node by index in non empty linked list", () => {
+    const LL = new LinkedList();
+    LL.insertAtBeginning(1);
+    LL.insertAtBeginning(2);
+    LL.insertAtBeginning(3);
+    LL.deleteByIndex(1);
+    LL.deleteByIndex(0);
+
+    expect(LL.head.value).toEqual(1);
+    expect(LL.head.next).toBeNull(); 
+   });
+   
+  it("Test deleting middle node for one element linked list", () => {
+    const LL = new LinkedList();
+    LL.insertAtBeginning(1);
+    LL.deleteByIndex(5);
+    expect(LL.head.value).toEqual(1);
+    expect(LL.head.next).toBeNull();
+
+  });
+});
